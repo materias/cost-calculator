@@ -1,17 +1,25 @@
-import React from 'react'
 import Header from './components/Header'
-import CalculatorForm from './components/CalculatorForm'
-import CostBreakdown from './components/CostBreakdown'
-import ResultDisplay from './components/ResultDisplay'
 import Footer from './components/Footer'
+import React, { useState } from 'react'
+import CalculatorForm from './components/CalculatorForm'
 
 function App() {
+  const [params, setParams] = useState({
+    currency: 'USD',
+    numberOfUsers: 1,
+  })
+
+  const handleUpdateParams = (newParams) => {
+    setParams((prevParams) => ({
+      ...prevParams,
+      ...newParams,
+    }))
+  }
+
   return (
     <div className="App">
       <Header />
-      <CalculatorForm />
-      <CostBreakdown />
-      <ResultDisplay />
+      <CalculatorForm params={params} onUpdateParams={handleUpdateParams} />
       <Footer />
     </div>
   )
