@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import InputField from "./InputField";
+import PlanSelector from "./PlanSelector";
 import RadioButton from "./RadioButton";
 
 function CalculatorForm({ onUpdateParams }) {
@@ -46,8 +47,7 @@ function CalculatorForm({ onUpdateParams }) {
         <div className='container'>
           <div className='grid-block'>
             <div className='block-users'>
-              <label>
-                Number of Users:
+              <label> Number of Users:
                 <input type='number' value={numberOfUsers} min='1' onChange={handleUserChange} />
               </label>
             </div>
@@ -61,23 +61,7 @@ function CalculatorForm({ onUpdateParams }) {
               <img loading='lazy' src='images/brand-logo.svg' alt='Brand Logo' width='341' height='92' />
             </div>
 
-            <div className='shadow-box brand'>
-              <p>CHOOSE YOUR BRAND PLAN</p>
-              <div className='brand-plan'>
-                {["plan_1", "plan_2", "plan_3"].map((planType) => (
-                  <div key={planType}>
-                    <input type='radio' name='choose-plan' id={planType} checked={plan === planType} onChange={handlePlanChange} />
-                    <label htmlFor={planType}>
-                      {planType.charAt(0).toUpperCase() + planType.slice(1)}
-                      <span className='input-prices'>
-                        <input type='text' placeholder='0' className='input-price' disabled={planType !== plan} />
-                        <span className='currency'>$</span>
-                      </span>
-                    </label>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <PlanSelector plans={["plan_1", "plan_2", "plan_3"]} selectedPlan={plan} onChange={handlePlanChange} />
 
             <div className='costs'>
               {[
