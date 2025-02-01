@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import InputField from "./InputField";
 import RadioButton from "./RadioButton";
 
 function CalculatorForm({ onUpdateParams }) {
@@ -80,18 +81,11 @@ function CalculatorForm({ onUpdateParams }) {
 
             <div className='costs'>
               {[
-                {
-                  id: "telecom_cost",
-                  label: "Telecom - Local and Long Distance",
-                },
+                { id: "telecom_cost", label: "Telecom - Local and Long Distance" },
                 { id: "service_cost", label: "Service or Parts Charges" },
                 { id: "support_cost", label: "Support and Software Upgrades" },
               ].map(({ id, label }) => (
-                <div className='existing-costs row' key={id}>
-                  <p>{label}</p>
-                  <input type='text' id={id} value={id === "telecom_cost" ? telecomCost : id === "service_cost" ? serviceCost : supportCost} onChange={handleCostChange(id === "telecom_cost" ? setTelecomCost : id === "service_cost" ? setServiceCost : setSupportCost)} placeholder='0' min='0' max='100' maxLength='5' />
-                  <span className='currency'>$</span>
-                </div>
+                <InputField key={id} id={id} label={label} value={id === "telecom_cost" ? telecomCost : id === "service_cost" ? serviceCost : supportCost} onChange={handleCostChange(id === "telecom_cost" ? setTelecomCost : id === "service_cost" ? setServiceCost : setSupportCost)} placeholder='0' />
               ))}
             </div>
           </div>
